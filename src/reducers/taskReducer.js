@@ -19,11 +19,13 @@ const taskReducer = (state = initialState, action) => { //the state represents t
           ...state.tasks,
             {
             id: state.tasks.length + 1, //it helps us to generate a unique ID for the new task
+            name: action.payload.name,
             description: action.payload.description, //we are extracting task description from action payload by this code
             isDone: false, //isDone is set to false for the new task
           },
         ],
       };
+
 
       //this case is made to the EDIT_TASK action type
     case EDIT_TASK:
@@ -54,9 +56,10 @@ const taskReducer = (state = initialState, action) => { //the state represents t
       return {
         ...state,
         //its main function is updating the filtertype property with the value provided in the action payload
-        filterType: action.payload.filterType,
+        filterType: action.payload,
       };
 
+      
       //the responsible case for DELETE_TASK action type
     case DELETE_TASK:
       return {
